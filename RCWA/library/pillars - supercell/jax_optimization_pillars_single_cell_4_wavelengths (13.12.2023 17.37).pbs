@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+#SBATCH --time=15:00:00 
+#SBATCH --mem-per-cpu=60gb
+#SBATCH --mail-user=joeri.lenaerts@vub.be
+
+#SBATCH --gpus-per-node=1
+#SBATCH --partition=ampere_gpu
+
+echo Start Job
+date
+
+ml SciPy-bundle/2022.05-foss-2022a
+ml matplotlib/3.5.2-foss-2022a
+ml TensorFlow/2.11.0-foss-2022a-CUDA-11.7.0
+ml jax/0.3.25-foss-2022a
+ml Optax/0.1.7-foss-2022a
+
+python '/scratch/brussel/105/vsc10503/carbon monitoring/python/jax_optimization_pillars_single_cell_3_wavelengths.py'
+echo End Job
